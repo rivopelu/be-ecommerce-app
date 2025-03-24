@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1.0.2" author="rivo pelu">
+        <addForeignKeyConstraint baseTableName="account" baseColumnNames="role_id" constraintName="account_role_fk" referencedTableName="role"
+                                 referencedColumnNames="id"/>
+        <createTable tableName="role_privileges">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="role_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="privilege_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="role_privileges" baseColumnNames="role_id" constraintName="role_privileges_fk" referencedTableName="role"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="role_privileges" baseColumnNames="privilege_id" constraintName="privileges_role_fk" referencedTableName="privilege"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
